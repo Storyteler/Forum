@@ -3,6 +3,8 @@ package cn.shuoshuge.dao;
 
 import cn.shuoshuge.entity.User;
 import cn.shuoshuge.util.DbHelp;
+import com.sun.org.apache.xerces.internal.impl.dv.DVFactoryException;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 public class UserDao {
 
@@ -26,4 +28,17 @@ public class UserDao {
         DbHelp.update(sql,user.getAvatar(),user.getId());
     }
 
+    public User findByUsername(String username) {
+
+        String sql = "select * from t_user where username=?";
+        return DbHelp.query(sql,new BeanHandler<User>(User.class),username);
+
+    }
+
+    public User findByEmail(String email) {
+
+        String sql = "select from t_user where email=?";
+        return DbHelp.query(sql,new BeanHandler<User>(User.class),email);
+
+    }
 }
