@@ -13,4 +13,17 @@ public class RegServlet extends BaseServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         jumpToJsp("reg.jsp",req,resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+
+
+
+
+
+    }
 }

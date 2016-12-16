@@ -51,7 +51,7 @@
             </div>
             <div class="form-actions">
                 <button type="button" id="regBtn" class="btn btn-primary">注册</button>
-                <a href="login.html">登录</a>
+                <a href="/login">登录</a>
             </div>
         </form>
     </div>
