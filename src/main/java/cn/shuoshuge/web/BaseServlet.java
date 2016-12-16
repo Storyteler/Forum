@@ -1,5 +1,7 @@
 package cn.shuoshuge.web;
 
+import com.google.gson.Gson;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ public class BaseServlet extends HttpServlet {
     }
 
     public void getPrint(String print,HttpServletResponse response) {
+        response.setContentType("text/plain;charset=UTF-8");
         //为什么不选择抛出一场
         PrintWriter pw = null;
         try {
@@ -24,6 +27,15 @@ public class BaseServlet extends HttpServlet {
         }
         pw.flush();
         pw.close();
+    }
 
+    public void getJson(Object object,HttpServletResponse response) throws IOException {
+        response.setContentType("application/json;charest=UTF-8");
+        //为什么不选择抛出一场
+        PrintWriter pw = null;
+        pw = response.getWriter();
+        pw.print(new Gson().toJson(object));
+        pw.flush();
+        pw.close();
     }
 }

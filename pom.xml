@@ -22,9 +22,27 @@
     <ehcache-version>2.6.11</ehcache-version>
     <guave-version>20.0</guave-version>
     <lang3-version>3.4</lang3-version>
+    <codec-version>1.10</codec-version>
+    <email-version>1.4</email-version>
+    <gson-version>2.6.2</gson-version>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-email</artifactId>
+      <version>${email-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${codec-version}</version>
+    </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>

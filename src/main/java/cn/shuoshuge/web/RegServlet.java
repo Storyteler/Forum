@@ -1,10 +1,14 @@
 package cn.shuoshuge.web;
 
+import cn.shuoshuge.service.UserService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/reg")
 public class RegServlet extends BaseServlet {
@@ -21,9 +25,17 @@ public class RegServlet extends BaseServlet {
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
 
-
-
-
+        Map<String ,String> map = new HashMap<>();
+        UserService userService = new UserService();
+        try {
+            userService.save(username,password,email,phone);
+            map.put("state","success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("state","error");
+            map.put("message","注册失败，请稍后重试");
+        }
+        getJson(map,resp);
 
     }
 }

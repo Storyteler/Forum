@@ -3,6 +3,15 @@ package cn.shuoshuge.entity;
 import java.sql.Timestamp;
 
 public class User {
+    //默认头像图像名称
+    public static final String DEFAULT_AVATAR = "default.jsp";
+    //用户未激活
+    public static final Integer USER_STATE_UNACTIVE = 0;
+    //正常
+    public static final Integer USER_STATE_ACTIVE = 1;
+    //账户被禁用
+    public static final Integer USER_STATE_DISABLED = 2;
+
 
     private Integer id;
     private String username;

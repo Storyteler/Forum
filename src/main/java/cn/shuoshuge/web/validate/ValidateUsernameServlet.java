@@ -6,10 +6,11 @@ import cn.shuoshuge.util.StringUtil;
 import cn.shuoshuge.web.BaseServlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+@WebServlet("/validate/username")
 public class ValidateUsernameServlet extends BaseServlet {
 
     UserService userService = new UserService();

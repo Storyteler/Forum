@@ -3,14 +3,13 @@ package cn.shuoshuge.dao;
 
 import cn.shuoshuge.entity.User;
 import cn.shuoshuge.util.DbHelp;
-import com.sun.org.apache.xerces.internal.impl.dv.DVFactoryException;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 
 public class UserDao {
 
     public void save(User user) {
-        String sql = "insert into t_user(username,password,email,phone,state,) value(?,?,?,?,?)";
-        DbHelp.update(sql,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),user.getState());
+        String sql = "insert into t_user(username,password,email,phone,avatar,state) value(?,?,?,?,?,?)";
+        DbHelp.update(sql,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),user.getAvatar(),user.getState());
     }
 
     public void updateEmail(User user) {
@@ -37,7 +36,7 @@ public class UserDao {
 
     public User findByEmail(String email) {
 
-        String sql = "select from t_user where email=?";
+        String sql = "select * from t_user where email=?";
         return DbHelp.query(sql,new BeanHandler<User>(User.class),email);
 
     }

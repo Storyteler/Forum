@@ -13,7 +13,7 @@ $(function () {
                 //长度为一至六之间的字符
                 rangelength:[1,6],
                 //跳转至此servlet中进行判断
-                remote:"/validate/name"
+                remote:"/validate/username"
             },
             password:{
                 required:true,
@@ -73,7 +73,7 @@ $(function () {
                     $("#regBtn").text("注册中...").attr("disabled","disabled")
                 },
                 success:function (data) {
-                    if(data == "success") {
+                    if(data.state == "success") {
                         alert("注册成功,请登录");
                         window.location.href = "/login"; 
                     } else {

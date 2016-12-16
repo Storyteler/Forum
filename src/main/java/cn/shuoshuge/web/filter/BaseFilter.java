@@ -2,7 +2,6 @@ package cn.shuoshuge.web.filter;
 
 
 import javax.servlet.*;
-import java.io.IOException;
 
 public abstract class BaseFilter implements Filter {
     @Override
