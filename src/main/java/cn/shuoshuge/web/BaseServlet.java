@@ -15,25 +15,24 @@ public class BaseServlet extends HttpServlet {
         request.getRequestDispatcher("WEB-INF/views/" + path).forward(request,response);
     }
 
-    public void getPrint(String print,HttpServletResponse response) {
+    public void getPrint(String print,HttpServletResponse response) throws IOException {
+        //输出的时候都得写请求头,text/plain为字符串型
         response.setContentType("text/plain;charset=UTF-8");
         //为什么不选择抛出一场
         PrintWriter pw = null;
-        try {
-            pw = response.getWriter();
-            pw.print(print);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        pw = response.getWriter();
+        pw.print(print);
         pw.flush();
         pw.close();
     }
 
     public void getJson(Object object,HttpServletResponse response) throws IOException {
+        //json请求头为application/json
         response.setContentType("application/json;charest=UTF-8");
         //为什么不选择抛出一场
         PrintWriter pw = null;
         pw = response.getWriter();
+        //调用Gson将一个object对象转换为json对象
         pw.print(new Gson().toJson(object));
         pw.flush();
         pw.close();

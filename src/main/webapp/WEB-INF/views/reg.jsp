@@ -61,6 +61,7 @@
 <!--container end-->
 <script src="/static/js/jquery-1.11.1.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
+<%--一般js不html下方而是单独写一个js文件，再在html中导入js--%>
 <script src="/static/js/user/reg.js"></script>
 </body>
 </html>

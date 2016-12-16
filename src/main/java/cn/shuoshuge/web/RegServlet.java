@@ -25,6 +25,7 @@ public class RegServlet extends BaseServlet {
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
 
+        //json一般传入一个键值对，用Map集合
         Map<String ,String> map = new HashMap<>();
         UserService userService = new UserService();
         try {
@@ -35,6 +36,7 @@ public class RegServlet extends BaseServlet {
             map.put("state","error");
             map.put("message","注册失败，请稍后重试");
         }
+        //将map写入json
         getJson(map,resp);
 
     }

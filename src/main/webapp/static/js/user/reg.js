@@ -5,7 +5,7 @@ $(function () {
     //validate方法中只有对象，都是键值对
     $("#regForm").validate({
         errorElemet:'span',
-        //低版本为这个，高版本为danger
+        //低版本为这个，高版本为texr-danger
         errorClass:'text-error',
         rules:{
             username:{
@@ -66,12 +66,18 @@ $(function () {
         },
         submitHandler:function () {
             $.ajax({
+                //表单提交地址
                 url:"/reg",
+                //表单提交方式
                 type:"post",
+                //传递的值，get中是在url后面添加，serialize（）取得表单中所有元素
                 data:$("#regForm").serialize(),
+                //发送请求之前执行的函数
                 beforeSend:function () {
+                    //disabled属性为禁用
                     $("#regBtn").text("注册中...").attr("disabled","disabled")
                 },
+                //请求成功是执行的函数，data为返回的对象
                 success:function (data) {
                     if(data.state == "success") {
                         alert("注册成功,请登录");
@@ -80,9 +86,11 @@ $(function () {
                         alert(data.message);
                     }
                 },
+                //请求失败的执行的函数
                 error:function () {
                     alert("服务器异常");
                 },
+                //请求完成时执行的函数
                 complete:function () {
                     $("#regBtn").text("注册").removeAttr("disabled");
                 }

@@ -16,8 +16,8 @@ public class StringUtil extends StringUtils {
             return new String(str.getBytes("ISO8859-1"),"UTF-8");
         } catch (UnsupportedEncodingException e) {
             logger.error("字符串{}转换异常",str);
-            e.printStackTrace();
-            throw new RuntimeException("字符串" + str + "转换异常",e);//有问题
+            //将jdk中自带的异常信息转化为自己写入的信息
+            throw new RuntimeException("字符串" + str + "转换异常",e);
         }
 
     }
