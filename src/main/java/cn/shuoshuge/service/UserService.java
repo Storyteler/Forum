@@ -24,8 +24,16 @@ public class UserService {
 
     private UserDao userDao = new UserDao();
     //发送激活邮件的TOKEN缓存
-    private static Cache<String,String> cache = CacheBuilder.newBuilder()
+    private static Cache<String,Object> cache = CacheBuilder.newBuilder()
             .expireAfterWrite(6, TimeUnit.HOURS)
+            .build();
+    //在用户找回密码时，防止恶意发送邮件
+    private static  Cache<String,Object> activeCache = CacheBuilder.newBuilder()
+            .expireAfterWrite(60,TimeUnit.SECONDS)
+            .build();
+    //找回密码时的token
+    private static Cache<String ,Object> passwordCache = CacheBuilder.newBuilder()
+            .expireAfterWrite(30,TimeUnit.MINUTES)
             .build();
 
 
@@ -91,7 +99,7 @@ public class UserService {
 
     public void activeUser(String token) {
 
-        String username = cache.getIfPresent(token);
+        String username = (String) cache.getIfPresent(token);
         if(username == null) {
             throw new ServiceException("验证信息已失效或不存在");
         } else {
@@ -132,5 +140,34 @@ public class UserService {
                 return user;
             }
         }
+    }
+
+    public void foundPassword(String value,String type,String sessionID) {
+        if (activeCache.getIfPresent(sessionID) == null) {
+            if ("phone".equals(type)) {
+                //TODO 手机找回
+            } else {
+                User user = userDao.findByEmail(value);
+                if (user == null) {
+                    throw new ServiceException("邮箱地址输入有误");
+                } else {
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String uuid = UUID.randomUUID().toString();
+                            String url = "http://shuoshuge.cn/reset?token=" + uuid;
+                            passwordCache.put(uuid,user);
+                            String html = user.getUsername() + "<br>请点击链接<a href='"+ url +"'>重置密码</a><br>如果非本人请求请无视这封邮件";
+                            EmailUtil.sendHtmlEmail(value,"重制密码邮件",html);
+                        }
+                    });
+                    thread.start();
+                }
+            }
+            activeCache.put(sessionID,"feng");
+        } else {
+            throw new ServiceException("操作频率过快，请稍后重试");
+        }
+
     }
 }
