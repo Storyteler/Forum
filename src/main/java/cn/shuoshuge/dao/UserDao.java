@@ -12,19 +12,9 @@ public class UserDao {
         DbHelp.update(sql,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),user.getAvatar(),user.getState());
     }
 
-    public void updateEmail(User user) {
-        String sql = "update t_user email=? where id=?";
-        DbHelp.update(sql,user.getEmail(),user.getId());
-    }
-
-    public void updatePassword(User user) {
-        String sql = "update t_user password=? where id=?";
-        DbHelp.update(sql,user.getPassword(),user.getId());
-    }
-
-    public void updateAvatar(User user) {
-        String sql = "update t_user avater=? where id=?";
-        DbHelp.update(sql,user.getAvatar(),user.getId());
+    public void update(User user) {
+        String sql = "update t_user set password=?,email=?,avatar=?,state=? where id=?";
+        DbHelp.update(sql,user.getPassword(),user.getEmail(),user.getAvatar(),user.getState(),user.getId());
     }
 
     public User findByUsername(String username) {

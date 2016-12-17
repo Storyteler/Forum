@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class BaseServlet extends HttpServlet {
 
     public void jumpToJsp(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/" + path).forward(request,response);
+        request.getRequestDispatcher("WEB-INF/views/" + path + ".jsp").forward(request,response);
     }
 
     public void getPrint(String print,HttpServletResponse response) throws IOException {

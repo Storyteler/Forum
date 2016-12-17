@@ -2,6 +2,7 @@ package cn.shuoshuge.service;
 
 import cn.shuoshuge.dao.UserDao;
 import cn.shuoshuge.entity.User;
+import cn.shuoshuge.exception.ServiceException;
 import cn.shuoshuge.util.Config;
 import cn.shuoshuge.util.EmailUtil;
 import com.google.common.cache.Cache;
@@ -68,9 +69,9 @@ public class UserService {
                 //创建一个token
                 String uuid = UUID.randomUUID().toString();
                 //激活邮件的跳转地址
-                String url = "http://shuoshuge.cn/login?" + uuid;
+                String url = "http://shuoshuge.cn/active?token=" + uuid;
                 //存入缓存区,生命周期为六小时
-                cache.put(uuid,url);
+                cache.put(uuid,username);
                 //转换为html
                 String html = "<h2>Dear," + username + "<a href='" + url +"'>请点击链接激活账号</a></h2>";
                 //给用户发送电子邮件
@@ -79,6 +80,24 @@ public class UserService {
         });
         //开启多线程
         thread.start();
+
+    }
+
+    public void activeUser(String token) {
+
+        String username = cache.getIfPresent(token);
+        if(username == null) {
+            throw new ServiceException("验证信息已失效或不存在");
+        } else {
+            User user = userDao.findByUsername(username);
+            if(user == null) {
+                throw new ServiceException("账户找不到");
+            } else {
+                user.setState(User.USER_STATE_ACTIVE);
+                userDao.update(user);
+                cache.invalidate(token);
+            }
+        }
 
     }
 }

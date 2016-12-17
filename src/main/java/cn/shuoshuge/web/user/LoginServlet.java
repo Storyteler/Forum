@@ -13,6 +13,6 @@ public class LoginServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        jumpToJsp("login.jsp",req,resp);
+        jumpToJsp("login",req,resp);
     }
 }

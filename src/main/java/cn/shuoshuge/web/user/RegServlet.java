@@ -16,7 +16,7 @@ public class RegServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        jumpToJsp("reg.jsp",req,resp);
+        jumpToJsp("reg",req,resp);
     }
 
     @Override
