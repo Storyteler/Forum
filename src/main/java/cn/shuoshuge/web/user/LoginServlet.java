@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ public class LoginServlet extends BaseServlet {
         Map<String,Object> map = Maps.newHashMap();
         try {
             User user = userService.validateUser(username, password,ip);
+            HttpSession session = req.getSession();
+            session.setAttribute("user",user);
             map.put("state","success");
         } catch (Exception ex) {
             String message = ex.getMessage();
