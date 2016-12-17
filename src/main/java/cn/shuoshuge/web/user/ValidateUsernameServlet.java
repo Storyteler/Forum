@@ -1,4 +1,4 @@
-package cn.shuoshuge.web.validate;
+package cn.shuoshuge.web.user;
 
 
 import cn.shuoshuge.service.UserService;
@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-@WebServlet("/validate/username")
+@WebServlet("/user/username")
 public class ValidateUsernameServlet extends BaseServlet {
 
     UserService userService = new UserService();

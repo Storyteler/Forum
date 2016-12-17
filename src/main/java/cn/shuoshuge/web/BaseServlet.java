@@ -32,7 +32,7 @@ public class BaseServlet extends HttpServlet {
         //为什么不选择抛出一场
         PrintWriter pw = null;
         pw = response.getWriter();
-        //调用Gson将一个object对象转换为json对象
+        //调用Gson中的tojson方法将object的对象转换为json对象
         pw.print(new Gson().toJson(object));
         pw.flush();
         pw.close();

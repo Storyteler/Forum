@@ -13,7 +13,7 @@ $(function () {
                 //长度为一至六之间的字符
                 rangelength:[1,6],
                 //跳转至此servlet中进行判断
-                remote:"/validate/username"
+                remote:"/user/username"
             },
             password:{
                 required:true,
@@ -29,7 +29,7 @@ $(function () {
                 required:true,
                 //判断邮箱是否正确
                 email:true,
-                remote:"/validate/email"
+                remote:"/user/email"
             },
             phone:{
                 required:true,

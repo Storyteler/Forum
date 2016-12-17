@@ -1,6 +1,7 @@
-package cn.shuoshuge.web;
+package cn.shuoshuge.web.user;
 
 import cn.shuoshuge.service.UserService;
+import cn.shuoshuge.web.BaseServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

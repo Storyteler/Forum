@@ -5,7 +5,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//记得重写
+//TODO 记得重写
 public class EmailUtil {
 
     private static Logger logger = LoggerFactory.getLogger(EmailUtil.class);
