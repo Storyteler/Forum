@@ -1,6 +1,8 @@
 package cn.shuoshuge.service;
 
+import cn.shuoshuge.dao.LoginLogDao;
 import cn.shuoshuge.dao.UserDao;
+import cn.shuoshuge.entity.LoginLog;
 import cn.shuoshuge.entity.User;
 import cn.shuoshuge.exception.ServiceException;
 import cn.shuoshuge.util.Config;
@@ -8,6 +10,8 @@ import cn.shuoshuge.util.EmailUtil;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +20,9 @@ import java.util.concurrent.TimeUnit;
 
 public class UserService {
 
-    UserDao userDao = new UserDao();
+    private Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    private UserDao userDao = new UserDao();
     //发送激活邮件的TOKEN缓存
     private static Cache<String,String> cache = CacheBuilder.newBuilder()
             .expireAfterWrite(6, TimeUnit.HOURS)
@@ -99,5 +105,32 @@ public class UserService {
             }
         }
 
+    }
+
+    public User validateUser(String username, String password,String ip) {
+
+        User user = userDao.findByUsername(username);
+        if(user == null) {
+            throw new ServiceException("用户名或密码错误");
+        } else if(!user.getPassword().equals(DigestUtils.md5Hex(password + Config.get("user.password.salt")))) {
+            throw new ServiceException("用户名或密码错误");
+        } else {
+            if(user.getState().equals(User.USER_STATE_UNACTIVE)) {
+                throw new ServiceException("账户未激活，请前往邮箱激活");
+            } else if(user.getState().equals(User.USER_STATE_DISABLED)) {
+                throw new ServiceException("账户已被禁用");
+            } else {
+
+                LoginLog loginLog = new LoginLog();
+                loginLog.setIp(ip);
+                loginLog.setUser_id(user.getId());
+                LoginLogDao loginLogDao = new LoginLogDao();
+                loginLogDao.save(loginLog);
+
+                logger.info("{}登陆,ip:{}",username,ip);
+
+                return user;
+            }
+        }
     }
 }
