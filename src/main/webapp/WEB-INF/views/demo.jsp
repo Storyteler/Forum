@@ -1,7 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>demo</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
@@ -11,7 +12,7 @@
 <body>
 <div class="header-bar">
     <div class="container">
-        <a href="#" class="brand">
+        <a href="/home" class="brand">
             <i class="fa fa-reddit-alien"></i>
         </a>
         <ul class="unstyled inline pull-right">
