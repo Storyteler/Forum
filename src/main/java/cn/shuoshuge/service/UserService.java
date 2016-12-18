@@ -170,4 +170,24 @@ public class UserService {
         }
 
     }
+
+    public User foundUser(String token) {
+        User user = (User) passwordCache.getIfPresent(token);
+        if (user == null) {
+            throw new ServiceException("此链接已失效，请重新发送邮件");
+        } else {
+            return user;
+        }
+    }
+
+    public void reset(String token, String password) {
+        User user = (User) passwordCache.getIfPresent(token);
+        if(user == null) {
+            throw new ServiceException("重置信息已失效，请重新找回");
+        } else {
+            user.setPassword(DigestUtils.md5Hex(password + Config.get("user.password.salt")));
+            userDao.update(user);
+            logger.info("{}修改了密码",user.getUsername());
+        }
+    }
 }
