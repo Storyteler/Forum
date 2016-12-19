@@ -209,4 +209,11 @@ public class UserService {
             throw new ServiceException("请登录后再试");
         }
     }
+
+    public void updateAtavar(User user, String fileKey) {
+
+        user.setAvatar(fileKey);
+        userDao.update(user);
+
+    }
 }

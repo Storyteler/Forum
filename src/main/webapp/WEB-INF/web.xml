@@ -16,5 +16,19 @@
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>cn.shuoshuge.web.filter.LoginFilter</filter-class>
+        <!-- /settion,/addquestion... -->
+        <init-param>
+            <param-name>accessUri</param-name>
+            <param-value>/setting</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

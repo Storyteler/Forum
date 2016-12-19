@@ -31,8 +31,24 @@ public class SettingServlet extends BaseServlet {
             settingEmail(req,resp);
         } else if("password".equals(action)) {
             settingPassword(req,resp);
+        } else if("atavar".equals(action)) {
+            settingAtavar(req,resp);
         }
     }
+
+    private void settingAtavar(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        String fileKey = req.getParameter("fileKey");
+        User user = getSessionUser(req);
+        userService.updateAtavar(user,fileKey);
+
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setState("success");
+
+        getJson(jsonResult,resp);
+
+    }
+
 
     private void settingPassword(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
