@@ -190,4 +190,23 @@ public class UserService {
             logger.info("{}修改了密码",user.getUsername());
         }
     }
+
+    public void updateEmail(User user, String newEmail) {
+        user.setEmail(newEmail);
+        userDao.update(user);
+    }
+
+    public void updatePassword(User user, String password, String newPassword) {
+        String oldPassword = DigestUtils.md5Hex(password + Config.get("user.password.salt"));
+        if (user != null) {
+            if (user.getPassword().equals(oldPassword)) {
+                user.setPassword(DigestUtils.md5Hex(newPassword + Config.get("user.password.salt")));
+                userDao.update(user);
+            } else {
+                throw new ServiceException("请输入正确的原始密码");
+            }
+        } else {
+            throw new ServiceException("请登录后再试");
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package cn.shuoshuge.web;
 
+import cn.shuoshuge.entity.User;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -37,4 +38,10 @@ public class BaseServlet extends HttpServlet {
         pw.flush();
         pw.close();
     }
+
+    public User getSessionUser(HttpServletRequest req) {
+        return (User) req.getSession().getAttribute("user");
+    }
+
+
 }

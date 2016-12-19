@@ -18,7 +18,7 @@
         <ul class="unstyled inline pull-right">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
-                        <a href="#">
+                        <a href="/setting">
                             <img src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/20/h/20" class="img-circle" alt="">
                         </a>
                     </li>
@@ -29,7 +29,7 @@
                         <a href="#"><i class="fa fa-bell"></i></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-cog"></i></a>
+                        <a href="/setting"><i class="fa fa-cog"></i></a>
                     </li>
                     <li>
                         <a href="/loginout"><i class="fa fa-sign-out"></i></a>

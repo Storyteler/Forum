@@ -18,6 +18,8 @@ public class LoginServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //判断是否有用户登陆
+        req.getSession().invalidate();
         jumpToJsp("login",req,resp);
     }
 
