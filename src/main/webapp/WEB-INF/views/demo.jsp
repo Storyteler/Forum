@@ -19,7 +19,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                         <a href="/setting">
-                            <img src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/20/h/20" class="img-circle" alt="">
+                                <img id="demo_avatar" src="http://oigkz9w96.bkt.clouddn.com/${sessionScope.user.avatar}?imageView2/1/w/30/h/30" class="img-circle" alt="">
                         </a>
                     </li>
                     <li>

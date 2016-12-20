@@ -30,13 +30,15 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        alert("邮箱修改成功");
+                        swal("邮箱修改成功!", "OK", "success");
+                        swal("Good job!", "You clicked the button!", "success");
+                        // swal("邮箱修改成功!")
                     } else {
-                        alert(data.message);
+                        sweetAlert(data.message,'', "error");
                     }
                 },
                 error:function () {
-                    alert("服务器异常");
+                    sweetAlert("服务器异常",'', "error");
                 },
                 complete:function () {
                     $("#emailBtn").text("保存").removeAttr("disabled")
@@ -92,14 +94,14 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        alert("密码修改成功，请前往登陆");
+                        swal("密码修改成功，请前往登陆!", "OK", "success");
                         window.location.href = "/login";
                     } else {
-                        alert(data.message);
+                        sweetAlert(data.message,'', "error");
                     }
                 },
                 error:function () {
-                    alert("服务器异常");
+                    sweetAlert("服务器异常",'', "error");
                 },
                 complete:function () {
                     $("#passwordBtn").text("保存").removeAttr("disabled")

@@ -45,7 +45,7 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        alert("登陆成功");
+                        swal("登陆成功!", "OK", "success");
                         var url = getParameterByName("redirect");
                         if (url) {
                             window.location.href = url;
@@ -53,11 +53,11 @@ $(function () {
                             window.location.href = "/home";
                         }
                     } else {
-                        alert(data.message);
+                        sweetAlert(data.message,'', "error");
                     }
                 },
                 error:function () {
-                    alter("服务器异常")
+                    sweetAlert("服务器异常",'', "error");
                 },
                 complete:function () {
                    $("#loginBtn").text("登陆").removeAttr("disabled");

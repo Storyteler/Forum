@@ -42,7 +42,7 @@ $(function () {
             username:{
                 required:"用户名不能为空",
                 rangelength:"请输入符合要求的用户名长度",
-                remote:"请输入符合要求的用户名"
+                remote:"该用户名已被占用"
             },
             password:{
                 required:"密码不能为空",
@@ -80,15 +80,15 @@ $(function () {
                 //请求成功是执行的函数，data为返回的对象
                 success:function (data) {
                     if(data.state == "success") {
-                        alert("注册成功,请前往邮箱激活");
+                        swal("注册成功,请前往邮箱激活!", "OK", "success");
                         window.location.href = "/login"; 
                     } else {
-                        alert(data.message);
+                        sweetAlert(data.message,'', "error");
                     }
                 },
                 //请求失败的执行的函数
                 error:function () {
-                    alert("服务器异常");
+                    sweetAlert("服务器异常",'', "error");
                 },
                 //请求完成时执行的函数
                 complete:function () {

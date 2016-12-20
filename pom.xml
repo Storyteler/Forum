@@ -25,9 +25,15 @@
     <codec-version>1.10</codec-version>
     <email-version>1.4</email-version>
     <gson-version>2.6.2</gson-version>
+    <qiniu-version>7.0.8</qiniu-version>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.qiniu</groupId>
+      <artifactId>qiniu-java-sdk</artifactId>
+      <version>${qiniu-version}</version>
+    </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>

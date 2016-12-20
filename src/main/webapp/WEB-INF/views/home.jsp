@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,14 +24,15 @@
                 <li><a href="">Java</a></li>
             </ul>
         </div>
+        <% for (int i = 0;i<20;i++) { %>
         <div class="talk-item">
             <table class="talk-table">
                 <tr>
                     <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
+                        <img class="avatar" src="http://oigkz9w96.bkt.clouddn.com/default.png?imageView2/1/w/40/h/40" alt="">
                     </td>
                     <td width="80">
-                        <a href="">fankay</a>
+                        <a href="">付泽峰</a>
                     </td>
                     <td width="auto">
                         <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
@@ -41,272 +43,7 @@
                 </tr>
             </table>
         </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="talk-item">
-            <table class="talk-table">
-                <tr>
-                    <td width="50">
-                        <img class="avatar" src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" alt="">
-                    </td>
-                    <td width="80">
-                        <a href="">fankay</a>
-                    </td>
-                    <td width="auto">
-                        <a href="#">写了一个可以把你网站所有 js 代码格式化成圣诞树的 NodeJS 库： js2image</a>
-                    </td>
-                    <td width="50" align="center">
-                        <span class="badge">12</span>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <% }%>
 
     </div>
     <!--box end-->

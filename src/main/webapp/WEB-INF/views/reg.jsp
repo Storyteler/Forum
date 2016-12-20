@@ -7,6 +7,7 @@
     <title>注册用户</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/sweetalert.css">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -60,6 +61,7 @@
 </div>
 <!--container end-->
 <script src="/static/js/jquery-1.11.1.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
 <%--一般js不html下方而是单独写一个js文件，再在html中导入js--%>
 <script src="/static/js/user/reg.js"></script>

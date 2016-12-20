@@ -35,14 +35,14 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        alert("请前往邮箱，重制密码");
+                        swal("请前往邮箱，重制密码!", "OK", "success");
                         window.location.href = "/login";
                     } else {
-                        alert(data.message);
+                        sweetAlert(data.message,'', "error");
                     }
                 },
                 error:function () {
-                    alert("服务器异常");
+                    sweetAlert("服务器异常",'', "error");
                 },
                 complete:function () {
                     $("#foundBtn").text("提交").removeAttr("disabled");

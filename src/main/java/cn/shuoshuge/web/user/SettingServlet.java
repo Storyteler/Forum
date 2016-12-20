@@ -5,7 +5,9 @@ import cn.shuoshuge.dto.JsonResult;
 import cn.shuoshuge.entity.User;
 import cn.shuoshuge.exception.ServiceException;
 import cn.shuoshuge.service.UserService;
+import cn.shuoshuge.util.Config;
 import cn.shuoshuge.web.BaseServlet;
+import com.qiniu.util.Auth;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +23,10 @@ public class SettingServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //获得七牛的token
+        Auth auth = Auth.create(Config.get("qiniu.ak"),Config.get("qiniu.sk"));
+        String token = auth.uploadToken(Config.get("qiniu.name"));
+        req.setAttribute("token",token);
         jumpToJsp("setting",req,resp);
     }
 
@@ -31,7 +37,7 @@ public class SettingServlet extends BaseServlet {
             settingEmail(req,resp);
         } else if("password".equals(action)) {
             settingPassword(req,resp);
-        } else if("atavar".equals(action)) {
+        } else if("avatar".equals(action)) {
             settingAtavar(req,resp);
         }
     }

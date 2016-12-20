@@ -7,6 +7,7 @@
     <title>Title</title>
     <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="http://cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/sweetalert.css">
     <link rel="stylesheet" type="text/css" href="/static/js/webuploader/webuploader.css">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
@@ -83,7 +84,7 @@
             <div class="control-group">
                 <label class="control-label">当前头像</label>
                 <div class="controls">
-                    <img src="http://7xp5t4.com1.z0.glb.clouddn.com/Fqb8f9uDknAt2ilBoY-ipSZRMes-?imageView2/1/w/40/h/40" class="img-circle" alt="">
+                    <img id="avatar" src="http://oigkz9w96.bkt.clouddn.com/${sessionScope.user.avatar}?imageView2/1/w/60/h/60" class="img-circle" alt="">
                 </div>
             </div>
             <hr>
@@ -103,8 +104,9 @@
     <!--box end-->
 </div>
 <script src="/static/js/jquery-1.11.1.js"></script>
+<script src="/static/js/sweetalert.min.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/static/js/webuploader/webuploader.js"></script>
+<script src="/static/js/webuploader/webuploader.js"></script>
 <script src="/static/js/user/setting.js"></script>
 
 <script>
@@ -115,12 +117,14 @@
             // swf文件路径
             swf: '/static/js/Uploader.swf',
             // 文件接收服务端。
-            server: 'qiniu.com',
+            server: 'http://up-z1.qiniu.com/',
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#picker',
+            //{Object} [可选] [默认值：'file']  设置文件上传域的name
             fileVal:"file",
-            formData:{"token":${token}},
+            //{Object} [可选] [默认值：{}] 文件上传请求的参数表，每次发送都会发送此对象中的参数。
+            formData:{"token":"${token}"},
             // 只允许选择图片文件。
             accept: {
                 title: 'Images',
@@ -129,23 +133,24 @@
             }
         });
         //上传成功
-        uploder.on('uploadSuccess',function(file,data){
+        uploader.on('uploadSuccess',function(file,data){
             var fileKey = data.key;
             //修改数据库中的值
             $.post("/setting?action=avatar",{'fileKey':fileKey})
                 .done(function (data) {
                     if(data.state == 'success') {
-                        var url = "http://ohwnpkfcx.bkt.clouddn.com/"+fileKey;
-                        $("#avatar").attr("src",url+"?imageView2/1/w/40/h/40");
-                        $("#navbar_avatar").attr("src",url+"?imageView2/1/w/20/h/20");
+                        var url = "http://oigkz9w96.bkt.clouddn.com/"+fileKey;
+                        $("#avatar").attr("src",url+"?imageView2/1/w/60/h/60");
+                        $("#demo_avatar").attr("src",url+"?imageView2/1/w/30/h/30");
+                        swal("头像设置成功!", "OK", "success");
                     }
                 }).error(function(){
-                alert("头像设置失败");
+                sweetAlert(data.message,'', "error");
             });
         });
         //上传失败
-        uploder.on('uploadError',function(){
-            alert("上传失败,请稍后再试");
+        uploader.on('uploadError',function(){
+            sweetAlert("上传失败,请稍后再试",'', "error");
         });
     });
 </script>

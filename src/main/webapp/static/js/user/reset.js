@@ -38,14 +38,14 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        alert("重置成功，请重新登录");
+                        swal("重置成功，请重新登录!", "OK", "success");
                         window.location.href = "/login";
                     } else {
-                        alert(data.message);
+                        sweetAlert(data.message,'', "error");
                     }
                 },
                 error:function () {
-                    alert("服务器异常");
+                    sweetAlert("服务器异常",'', "error");
                 },
                 complete:function () {
                     $("#resetBtn").text("保存").removeAttr("disabled")
