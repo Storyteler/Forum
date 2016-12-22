@@ -80,8 +80,9 @@ $(function () {
                 //请求成功是执行的函数，data为返回的对象
                 success:function (data) {
                     if(data.state == "success") {
-                        swal("注册成功,请前往邮箱激活!", "OK", "success");
-                        window.location.href = "/login"; 
+                        swal("注册成功,请前往邮箱激活!", "OK", "success",function () {
+                            window.location.href = "/login";
+                        });
                     } else {
                         sweetAlert(data.message,'', "error");
                     }

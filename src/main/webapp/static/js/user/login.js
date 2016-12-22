@@ -52,6 +52,7 @@ $(function () {
                         } else {
                             window.location.href = "/home";
                         }
+
                     } else {
                         sweetAlert(data.message,'', "error");
                     }

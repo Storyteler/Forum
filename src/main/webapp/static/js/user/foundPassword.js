@@ -35,8 +35,9 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        swal("请前往邮箱，重制密码!", "OK", "success");
-                        window.location.href = "/login";
+                        swal("请前往邮箱，重制密码!", "OK", "success",function () {
+                            window.location.href = "/login";
+                        });
                     } else {
                         sweetAlert(data.message,'', "error");
                     }

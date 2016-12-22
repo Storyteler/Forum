@@ -13,7 +13,7 @@
 <div class="header-bar">
     <div class="container">
         <a href="/home" class="brand">
-            <i class="fa fa-reddit-alien"></i>
+            <i class="fa fa-home"></i>
         </a>
         <ul class="unstyled inline pull-right">
             <c:choose>
@@ -23,7 +23,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-plus"></i></a>
+                        <a href="/newTopic"><i class="fa fa-plus"></i></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bell"></i></a>

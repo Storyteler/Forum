@@ -38,8 +38,9 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        swal("重置成功，请重新登录!", "OK", "success");
-                        window.location.href = "/login";
+                        swal("重置成功，请重新登录!", "OK", "success",function () {
+                            window.location.href = "/login";
+                        });
                     } else {
                         sweetAlert(data.message,'', "error");
                     }

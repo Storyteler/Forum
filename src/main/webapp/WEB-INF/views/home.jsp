@@ -51,7 +51,7 @@
 <!--container end-->
 <div class="footer">
     <div class="container">
-        Copyright © 2016 kaishengit
+        Copyright © 2016 shuoshuge
     </div>
 </div>
 </body>

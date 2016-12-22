@@ -30,9 +30,8 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
+                        // swal("Good job!", "You clicked the button!", "success")
                         swal("邮箱修改成功!", "OK", "success");
-                        swal("Good job!", "You clicked the button!", "success");
-                        // swal("邮箱修改成功!")
                     } else {
                         sweetAlert(data.message,'', "error");
                     }
@@ -94,8 +93,9 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        swal("密码修改成功，请前往登陆!", "OK", "success");
-                        window.location.href = "/login";
+                        swal("密码修改成功，请前往登陆!", "OK", "success",function () {
+                            window.location.href = "/login";
+                        });
                     } else {
                         sweetAlert(data.message,'', "error");
                     }
