@@ -28,7 +28,7 @@
             </c:if>
             <c:if test="${not empty param.redirect}">
                 <div class="alert alert-success">
-                        请登陆后才能设置
+                        请登陆后才能进行操作
                 </div>
             </c:if>
             <div class="control-group">

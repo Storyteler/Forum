@@ -1,5 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,17 +25,16 @@
 <div class="container">
     <div class="box">
         <ul class="breadcrumb" style="background-color: #fff;margin-bottom: 0px;">
-            <li><a href="#">首页</a> <span class="divider">/</span></li>
-            <li class="active">问与答</li>
+            <li><a href="/home">首页</a> <span class="divider">/</span></li>
+            <li class="active">${topic.node.name}</li>
         </ul>
         <div class="topic-head">
             <img class="img-rounded avatar" src="http://oigkz9w96.bkt.clouddn.com/${sessionScope.user.avatar}?imageView2/1/w/60/h/60" alt="">
-            <h3 class="title">你们怎么发 git 的音？</h3>
-            <p class="topic-msg muted"><a href="">fankay</a> · 9小时前</p>
+            <h3 class="title">${topic.title}</h3>
+            <p class="topic-msg muted"><a href="">${topic.user.username}</a> · 9小时前</p>
         </div>
         <div class="topic-body">
-            <p>AngularJS is an MVC framework for building web applications. The core features include HTML enhanced with custom component and data-binding capabilities, dependency injection and strong focus on simplicity, testability, maintainability and boiler-plate reduction.</p>
-            <p>下载之前先检查一下是否准备好了一个代码编辑器(我们推荐使用 Sublime Text 2) ，你是否已经掌握了足够的HTML和CSS知识以开展工作。这里我们不详述源码文件，但是它们可以随时被下载。在这里我们只着重介绍使用已经编译好的Bootstrap文件进行入门讲解。</p>
+            ${topic.content}
         </div>
         <div class="topic-toolbar">
             <ul class="unstyled inline pull-left">
@@ -43,9 +43,9 @@
                 <li><a href=""></a></li>
             </ul>
             <ul class="unstyled inline pull-right muted">
-                <li>434次点击</li>
-                <li>8人收藏</li>
-                <li>2人感谢</li>
+                <li>${topic.click_num}次点击</li>
+                <li>${topic.collect_num}人收藏</li>
+                <li>${topic.thanks_num}人感谢</li>
             </ul>
         </div>
     </div>
@@ -53,9 +53,9 @@
 
     <div class="box" style="margin-top:20px;">
         <div class="talk-item muted" style="font-size: 12px">
-            9个回复 | 直到2015年12月25日 22:23:34
+            ${topic.reply_num}个回复 | 直到${topic.last_replytime}
         </div>
-        <% for (int i = 0;i < 9;i++) {%>
+        <c:forEach items="${list}" var="reply" varStatus="vs"></c:forEach>
         <div class="talk-item">
             <table class="talk-table">
                 <tr>
@@ -74,20 +74,25 @@
                 </tr>
             </table>
         </div>
-        <% } %>
-
     </div>
-
+    <c:when test="${not empty sessionScope.user}">
     <div class="box" style="margin:20px 0px;">
-        <div class="talk-item muted" style="font-size: 12px"><i class="fa fa-plus"></i> 添加一条新回复</div>
-        <form action="" style="padding: 15px;margin-bottom:0px;">
-            <textarea name="" id="editor"></textarea>
-        </form>
-        <div class="talk-item muted" style="text-align: right;font-size: 12px">
-            <span class="pull-left">请尽量让自己的回复能够对别人有帮助回复</span>
-            <button class="btn btn-primary">发布</button>
+            <div class="talk-item muted" style="font-size: 12px"><i class="fa fa-plus"></i> 添加一条新回复</div>
+            <form action="/reply" method="post" style="padding: 15px;margin-bottom:0px;" id="topicForm">
+                <input type="hidden" name="topic_id" value="${token.id}">
+                <textarea name="content" id="editor"></textarea>
+            </form>
+            <div class="talk-item muted" style="text-align: right;font-size: 12px">
+                <span class="pull-left">请尽量让自己的回复能够对别人有帮助回复</span>
+                <button type="button" id="topicBtn" class="btn btn-primary">发布</button>
+            </div>
         </div>
+    </c:when>
+    <c:otherwise>
+    <div class="box" style="margin:20px 0px;">
+        <div class="talk-item"> 请<a href="/login?redirect=topicDetail?topicid=${topic.id}#reply">登录</a>后再回复</div>
     </div>
+    </c:otherwise>
 
 </div>
 <!--container end-->
@@ -96,6 +101,8 @@
 <script src="/static/js/editer/scripts/hotkeys.min.js"></script>
 <script src="/static/js/editer/scripts/uploader.min.js"></script>
 <script src="/static/js/editer/scripts/simditor.min.js"></script>
+<script src="https://cdn.staticfile.org/moment.js/2.16.0/moment.min.js"></script>
+<script src="https://cdn.staticfile.org/moment.js/2.16.0/locale/zh-cn.js"></script>
 <script>
     $(function(){
         var editor = new Simditor({
@@ -103,6 +110,11 @@
             toolbar:false
             //optional options
         });
+
+        $("#topicBtn").click(function () {
+            $("#topicForm").submit();
+        });
+
     });
 </script>
 

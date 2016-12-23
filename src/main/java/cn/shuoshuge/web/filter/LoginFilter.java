@@ -32,7 +32,7 @@ public class LoginFilter extends BaseFilter {
                 }
             } else {
                 try {
-                    response.sendRedirect("/login?redirect=/setting");
+                    response.sendRedirect("/login?redirect=" + uri);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

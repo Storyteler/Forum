@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/sweetalert.css">
     <link rel="stylesheet" href="/static/js/editer/styles/simditor.css">
+    <link rel="stylesheet" href="/static/css/simditor-emoji.css">
+    <link rel="stylesheet" href="/static/css/styles/solarized-light.css">
+
 </head>
 <body>
 <%@include file="../demo.jsp"%>
@@ -50,7 +53,30 @@
 <script src="/static/js/editer/scripts/uploader.min.js"></script>
 <script src="/static/js/editer/scripts/simditor.min.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/js/simditor-emoji.js"></script>
+<script src="/static/js/highlight.pack.js"></script>
 <script src="/static/js/topic/newtopic.js"></script>
+<script>
+    $(function () {
+        var editor = new Simditor({
+            textarea: $('#editor'),
+            toolbar: ['title','bold','italic','underline','strikethrough',
+                'fontScale','color','ol' ,'ul', 'blockquote','code',
+                'table', 'image','emoji'],
+            emoji: {
+                imagePath: '/static/img/emoji/',
+//                images: ['+1.png',
+//                    '100.png',
+//                    '109.png']
+            },
+            upload:{
+                url: 'http://up-z1.qiniu.com/',
+                params:{"token":"${token}"},
+                fileKey:'file'
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

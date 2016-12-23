@@ -6,7 +6,10 @@ import cn.shuoshuge.entity.Node;
 import cn.shuoshuge.entity.Topic;
 import cn.shuoshuge.entity.User;
 import cn.shuoshuge.service.TopicService;
+import cn.shuoshuge.util.Config;
 import cn.shuoshuge.web.BaseServlet;
+import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +26,10 @@ public class NewTopicServlet extends BaseServlet {
         NodeDao dao = new NodeDao();
         List<Node> list = dao.findAll();
         req.setAttribute("list",list);
+        Auth auth = Auth.create(Config.get("qiniu.ak"),Config.get("qiniu.sk"));
+        StringMap stringMap = new StringMap();
+        stringMap.put("returnBody","{ \"success\": true,\"file_path\": \""+Config.get("qiniu.domain")+"${key}\"}");
+        String token = auth.uploadToken(Config.get("qiniu.bucket"),null,3600,stringMap);        req.setAttribute("token",token);
         jumpToJsp("topic/newTopic",req,resp);
     }
 
@@ -37,7 +44,6 @@ public class NewTopicServlet extends BaseServlet {
         Topic topic = topicService.createNewTopic(user,title,nodeId,content);
         JsonResult jsonResult = new JsonResult(topic);
         getJson(jsonResult,resp);
-
 
     }
 }

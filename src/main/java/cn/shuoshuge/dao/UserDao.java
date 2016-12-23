@@ -30,4 +30,10 @@ public class UserDao {
         return DbHelp.query(sql,new BeanHandler<User>(User.class),email);
 
     }
+
+    public User findById(Integer user_id) {
+
+        String sql = "select * from t_user where id=?";
+        return DbHelp.query(sql,new BeanHandler<>(User.class),user_id);
+    }
 }
