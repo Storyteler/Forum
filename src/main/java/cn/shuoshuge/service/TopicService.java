@@ -2,10 +2,7 @@ package cn.shuoshuge.service;
 
 
 import cn.shuoshuge.dao.*;
-import cn.shuoshuge.entity.Collect;
-import cn.shuoshuge.entity.Reply;
-import cn.shuoshuge.entity.Topic;
-import cn.shuoshuge.entity.User;
+import cn.shuoshuge.entity.*;
 import cn.shuoshuge.exception.ServiceException;
 
 import java.sql.Timestamp;
@@ -21,23 +18,32 @@ public class TopicService {
     CollectDao collectDao = new CollectDao();
 
     public Topic createNewTopic(User user, String title, String nodeId, String content) {
+        Integer node_id = Integer.valueOf(nodeId);
         Topic topic = new Topic();
         topic.setUser_id(user.getId());
         topic.setTitle(title);
-        topic.setNode_id(Integer.valueOf(nodeId));
+        topic.setNode_id(node_id);
         topic.setContent(content);
+        topic.setLast_replytime(new Timestamp(new Date().getTime()));
         Integer id = topicDao.save(topic);
+        Node node = nodeDao.findNodeById(node_id);
+        node.setTopic_num(node.getTopic_num() + 1);
+        nodeDao.update(node);
         topic.setId(id);
 
         return topic;
     }
 
     public Topic findById(String id) {
+        if (id != null) {
+            Topic topic = topicDao.query(Integer.valueOf(id));
+            topic.setUser(userDao.findById(topic.getUser_id()));
+            topic.setNode(nodeDao.findNodeById(topic.getNode_id()));
+            return topic;
+        } else {
+            throw new ServiceException("找不到帖子");
+        }
 
-        Topic topic = topicDao.query(Integer.valueOf(id));
-        topic.setUser(userDao.findById(topic.getUser_id()));
-        topic.setNode(nodeDao.findNodeById(topic.getNode_id()));
-        return topic;
     }
 
     public void create_reply(String topic_id, String content, User user) {
@@ -106,5 +112,33 @@ public class TopicService {
         topic.setCollect_num(topic.getCollect_num() + 1);
         topicDao.update(topic);
         return topic.getCollect_num();
+    }
+
+    public Topic edit_topic(String title, String content, String nodeName,String topic_id) {
+        Node afterNode = nodeDao.findNodeById(Integer.valueOf(nodeName));
+        if (afterNode != null) {
+            Topic topic = findById(topic_id);
+            if (topic != null) {
+                Node beforeNode = nodeDao.findNodeById(topic.getNode_id());
+                beforeNode.setTopic_num(beforeNode.getTopic_num() - 1);
+                nodeDao.update(beforeNode);
+
+                topic.setNode_id(afterNode.getId());
+                topic.setTitle(title);
+                topic.setContent(content);
+                topicDao.update(topic);
+
+                afterNode.setTopic_num(afterNode.getTopic_num() + 1);
+                nodeDao.update(afterNode);
+
+                return topic;
+            } else {
+                throw new ServiceException("该贴不存在或已删除");
+            }
+        } else {
+            throw new ServiceException("该节点不存在");
+        }
+
+
     }
 }

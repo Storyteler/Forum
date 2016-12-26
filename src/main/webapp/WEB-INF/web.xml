@@ -23,7 +23,7 @@
         <!-- /settion,/addquestion... -->
         <init-param>
             <param-name>accessUri</param-name>
-            <param-value>/setting,/newTopic</param-value>
+            <param-value>/setting,/newTopic,/edit</param-value>
         </init-param>
     </filter>
     <filter-mapping>

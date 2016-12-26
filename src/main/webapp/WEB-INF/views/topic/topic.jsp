@@ -43,7 +43,7 @@
                     <li><a id="collect" href="javascript:;">加入收藏</a></li>
                     <li><a href="">感谢</a></li>
                     <c:if test="${sessionScope.user.id == topic.user.id}">
-                        <li><a href="/edit">编辑</a></li>
+                        <li><a href="/edit?topic_id=${topic.id}">编辑</a></li>
                     </c:if>
                 </ul>
             </c:if>
@@ -58,7 +58,7 @@
 
     <div class="box" style="margin-top:20px;">
         <div class="talk-item muted" style="font-size: 12px">
-            ${topic.reply_num}个回复 | 直到<span id="last_replytime">${topic.last_replytime}</span>
+            ${topic.reply_num}个回复 | <c:if test="${not empty list}">直到<span id="last_replytime">${topic.last_replytime}</c:if></span>
         </div>
         <c:forEach items="${list}" var="reply" varStatus="vs">
             <div class="talk-item">
@@ -73,7 +73,7 @@
                             <p style="font-size: 14px">${reply.content}</p>
                         </td>
                         <td width="70" align="right" style="font-size: 12px">
-                            <a href="" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
+                            <a href="javascript:;" rel="${vs.count}" class="replyLink" title="回复"><i class="fa fa-reply"></i></a>&nbsp;
                             <span class="badge">${vs.count}</span>
                         </td>
                     </tr>
@@ -106,6 +106,7 @@
 <!--container end-->
 <script src="/static/js/jquery-1.11.1.js"></script>
 <script src="/static/js/sweetalert.min.js"></script>
+<script src="/static/js/highlight.pack.js"></script>
 <script src="/static/js/jquery.validate.min.js"></script>
 <script src="/static/js/editer/scripts/module.min.js"></script>
 <script src="/static/js/editer/scripts/hotkeys.min.js"></script>
@@ -127,8 +128,13 @@
         $("#replyBtn").click(function () {
             $("#replyForm").submit();
         });
-
-        $("")
+        //TODO感觉这里不会
+        $(".replyLink").click(function(){
+            var count = $(this).attr("rel");
+            var html = "<a href='#reply"+count+"'>#"+ count +"</a>";
+            editor.setValue(html + editor.getValue());
+            window.location.href="#reply";
+        });
 
         $("#replyForm").validate({
             errorElemet:"span",
@@ -168,11 +174,13 @@
         });
 
         $("#topictime").text(moment($("#topictime").text()).fromNow());
-        $("#last_replytime").text(moment($("#last_replytime").text()).fromNow("YYYY年MM月DD天 HH:mm:ss"));
+        $("#last_replytime").text(moment($("#last_replytime").text()).format("YYYY年MM月DD日 HH:mm:ss"));
         $(".reply").text(function () {
                 var $this = $(this).text();
                 return moment($this).fromNow();
         });
+
+         hljs.initHighlightingOnLoad();
 
 
     });
