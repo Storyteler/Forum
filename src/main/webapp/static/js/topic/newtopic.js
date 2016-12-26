@@ -34,7 +34,7 @@ $(function(){
                 success:function (json) {
                     if (json.state == "success") {
                         swal("发帖成功","","success");
-                        window.location.href = "/topic?id=" + json.data.id;
+                        window.location.href = "/topic?topic_id=" + json.data.id;
                     } else {
                         swal(json.message,"","error")
                     }

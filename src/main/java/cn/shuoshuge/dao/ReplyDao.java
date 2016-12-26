@@ -30,7 +30,7 @@ public class ReplyDao {
             protected Reply handleRow(ResultSet resultSet) throws SQLException {
                 Reply reply = new BasicRowProcessor().toBean(resultSet,Reply.class);
                 User user = new User();
-                user.setAvatar(Config.get("qiniu.name") + resultSet.getString("avatar"));
+                user.setAvatar(resultSet.getString("avatar"));
                 user.setId(resultSet.getInt(1));
                 user.setUsername(resultSet.getString("username"));
                 reply.setUser(user);

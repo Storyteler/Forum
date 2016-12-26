@@ -20,10 +20,11 @@ public class TopicServlet extends BaseServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id = req.getParameter("id");
+        String id = req.getParameter("topic_id");
         User user = (User) req.getSession().getAttribute("user");
         try {
             Topic topic = topicService.findById(id);
+            topicService.update_topic(topic);
             List<Reply> list = topicService.finAllReply(id);
 
             req.setAttribute("list",list);

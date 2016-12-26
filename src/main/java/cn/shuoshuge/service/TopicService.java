@@ -1,10 +1,8 @@
 package cn.shuoshuge.service;
 
 
-import cn.shuoshuge.dao.NodeDao;
-import cn.shuoshuge.dao.ReplyDao;
-import cn.shuoshuge.dao.TopicDao;
-import cn.shuoshuge.dao.UserDao;
+import cn.shuoshuge.dao.*;
+import cn.shuoshuge.entity.Collect;
 import cn.shuoshuge.entity.Reply;
 import cn.shuoshuge.entity.Topic;
 import cn.shuoshuge.entity.User;
@@ -20,6 +18,7 @@ public class TopicService {
     NodeDao nodeDao = new NodeDao();
     UserDao userDao = new UserDao();
     ReplyDao replyDao = new ReplyDao();
+    CollectDao collectDao = new CollectDao();
 
     public Topic createNewTopic(User user, String title, String nodeId, String content) {
         Topic topic = new Topic();
@@ -42,7 +41,7 @@ public class TopicService {
     }
 
     public void create_reply(String topic_id, String content, User user) {
-        Reply reply = null;
+        Reply reply = new Reply();
         Topic topic = topicDao.query(Integer.valueOf(topic_id));
 
         if (user != null) {
@@ -66,5 +65,46 @@ public class TopicService {
 
     public List<Reply> finAllReply(String id) {
         return replyDao.findAll(id);
+    }
+
+    public void update_topic(Topic topic) {
+
+        topic.setClick_num(topic.getClick_num() + 1);
+        topicDao.update(topic);
+
+    }
+
+    public int collect_event(User user, Topic topic, String action) {
+
+        if ("collect".equals(action)) {
+            return create_collect(user,topic);
+        } else {
+            return remove_collect(user,topic);
+        }
+
+    }
+
+    private int remove_collect(User user, Topic topic) {
+        Integer topic_id = topic.getId();
+        Integer user_id = user.getId();
+
+        collectDao.remove(topic_id,user_id);
+        topic.setCollect_num(topic.getCollect_num() - 1);
+        topicDao.update(topic);
+        return topic.getCollect_num();
+    }
+
+    private int create_collect(User user, Topic topic) {
+
+        Integer user_id = user.getId();
+        Integer topic_id = topic.getId();
+        Collect collect = new Collect();
+        collect.setUser_id(user_id);
+        collect.setTopic_id(topic_id);
+
+        collectDao.create(collect);
+        topic.setCollect_num(topic.getCollect_num() + 1);
+        topicDao.update(topic);
+        return topic.getCollect_num();
     }
 }
