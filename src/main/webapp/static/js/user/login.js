@@ -45,7 +45,6 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        // swal("登陆成功!", "OK", "success");
                         swal({
                                 title: "登录成功",
                                 text: "",

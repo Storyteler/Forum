@@ -1,8 +1,10 @@
 package cn.shuoshuge.service;
 
 import cn.shuoshuge.dao.LoginLogDao;
+import cn.shuoshuge.dao.NodifyDao;
 import cn.shuoshuge.dao.UserDao;
 import cn.shuoshuge.entity.LoginLog;
+import cn.shuoshuge.entity.Nodify;
 import cn.shuoshuge.entity.User;
 import cn.shuoshuge.exception.ServiceException;
 import cn.shuoshuge.util.Config;
@@ -23,6 +25,7 @@ public class UserService {
     private Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private UserDao userDao = new UserDao();
+    NodifyDao nodifyDao = new NodifyDao();
     //发送激活邮件的TOKEN缓存
     private static Cache<String,Object> cache = CacheBuilder.newBuilder()
             .expireAfterWrite(6, TimeUnit.HOURS)
@@ -215,5 +218,9 @@ public class UserService {
         user.setAvatar(fileKey);
         userDao.update(user);
 
+    }
+
+    public List<Nodify> findNodifyByUser(User user) {
+        return nodifyDao.findByUserId(user.getId());
     }
 }

@@ -18,6 +18,7 @@ public class TopicService {
     UserDao userDao = new UserDao();
     ReplyDao replyDao = new ReplyDao();
     CollectDao collectDao = new CollectDao();
+    NodifyDao nodifyDao = new NodifyDao();
 
     public Topic createNewTopic(User user, String title, String nodeId, String content) {
         Integer node_id = Integer.valueOf(nodeId);
@@ -62,6 +63,15 @@ public class TopicService {
                 topic.setReply_num(topic.getReply_num() + 1);
                 topic.setLast_replytime(new Timestamp(new Date().getTime()));
                 topicDao.update(topic);
+
+                //创建提醒消息
+                if (!user.getId().equals(topic.getUser_id())) {
+                    Nodify nodify = new Nodify();
+                    nodify.setUser_id(topic.getUser_id());
+                    nodify.setContent("<a href=\"/topic?topic_id=" + topic_id + "\">" + topic.getTitle() + "</a>有了新的消息，请查看");
+                    nodifyDao.save(nodify);
+                }
+
             } else {
                 throw new ServiceException("该贴不存在或已删除");
             }
