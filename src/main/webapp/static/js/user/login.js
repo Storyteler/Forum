@@ -45,13 +45,26 @@ $(function () {
                 },
                 success:function (data) {
                     if(data.state == "success") {
-                        swal("登陆成功!", "OK", "success");
-                        var url = getParameterByName("redirect");
-                        if (url) {
-                            window.location.href = url;
-                        } else {
-                            window.location.href = "/home";
-                        }
+                        // swal("登陆成功!", "OK", "success");
+                        swal({
+                                title: "登录成功",
+                                text: "",
+                                type: "success",
+                                confirmButtonColor: "#72d7dc",
+                                confirmButtonText: "确认",
+                                //cancelButtonText: "No, cancel plx!",
+                            },
+                            function(isConfirm){
+
+                                if(isConfirm){
+                                    var url = getParameterByName("redirect");
+                                    if (url) {
+                                        window.location.href = url;
+                                    } else {
+                                        window.location.href = "/home";
+                                    }
+                                }
+                            })
 
                     } else {
                         sweetAlert(data.message,'', "error");

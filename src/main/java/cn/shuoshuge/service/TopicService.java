@@ -4,6 +4,8 @@ package cn.shuoshuge.service;
 import cn.shuoshuge.dao.*;
 import cn.shuoshuge.entity.*;
 import cn.shuoshuge.exception.ServiceException;
+import cn.shuoshuge.util.Page;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -140,5 +142,23 @@ public class TopicService {
         }
 
 
+    }
+
+    public Page<Topic> findAll(int pageNo, String node_id) {
+        int count;
+        if (StringUtils.isEmpty(node_id)) {
+            count = topicDao.count();
+        } else {
+            count = topicDao.count(node_id);
+        }
+        Page<Topic> topicPage = new Page<>(count,pageNo);
+        List<Topic> topicList = topicDao.findAll(node_id,topicPage.getStart(),topicPage.getPageSize());
+        topicPage.setItems(topicList);
+        return topicPage;
+
+    }
+
+    public List<Node> findAllNode() {
+        return nodeDao.findAll();
     }
 }
