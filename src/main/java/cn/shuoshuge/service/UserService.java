@@ -15,7 +15,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -222,5 +224,16 @@ public class UserService {
 
     public List<Nodify> findNodifyByUser(User user) {
         return nodifyDao.findByUserId(user.getId());
+    }
+
+    public void updateNodify(String ids) {
+
+        String idArray[] = ids.split(",");
+        for (int i = 0;i<idArray.length;i++) {
+            Nodify nodify = nodifyDao.findById(idArray[i]);
+            nodify.setState(1);
+            nodify.setReadtime(new Timestamp(new Date().getTime()));
+            nodifyDao.update(nodify);
+        }
     }
 }

@@ -15,6 +15,7 @@
         <a href="/home" class="brand">
             <i class="fa fa-home"></i>
         </a>
+        <span class="hide" id="isLogin"><c:if test="${not empty sessionScope.curr_user}">1</c:if></span>
         <ul class="unstyled inline pull-right">
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">

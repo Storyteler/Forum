@@ -8,7 +8,7 @@
     <title>通知中心</title>
     <link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 <%@include file="../demo.jsp"%>
@@ -65,8 +65,7 @@
     <!--box end-->
 </div>
 <!--container end-->
-<script src="js/jquery-1.11.3.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
+<script src="/static/js/jquery-1.11.1.js"></script>
 <script>
     $(function () {
         $("#ckfather").click(function () {
@@ -103,20 +102,16 @@
             }
         });
 
-        $("#markBtn").click(function(){
+        $("#markBtn").click(function () {
             var ids = [];
             var sons = $(".ckSon");
-            for(var i=0 ; i<sons.length;i++){
-                if(sons[i].checked == true){
-                    //jquery的方法数组添加元素
+            for (var i=0;i<sons.length;i++) {
+                if (sons[i].checked) {
                     ids.push(sons[i].value);
                 }
             }
-            //将数组变成字符串
-            alert(ids.join(","));
-            $.post("/notifyRead",{"ids":ids.join(",")},function(json){
-                if (json == "success"){
-                    //刷新页面
+            $.post("/nodify_read",{"ids":ids.join(",")},function(json){
+                if (json == "success") {
                     window.history.go(0);
                 }
             });
