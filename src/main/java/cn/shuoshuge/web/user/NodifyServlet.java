@@ -32,9 +32,7 @@ public class NodifyServlet extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = getSessionUser(req);
-        //1.根据用户id和通知状态查询未读列表
-
-        //2.根据guava 的Collections2.filter 过滤未读消息数据
+        //根据guava 的Collections2.filter 过滤未读消息数据
         List<Nodify> notifyList = new UserService().findNodifyByUser(user);
         List<Nodify> unreadList = Lists.newArrayList(Collections2.filter(notifyList, new Predicate<Nodify>() {
             public boolean apply(Nodify notify) {

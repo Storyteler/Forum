@@ -17,7 +17,7 @@ public class NodifyDao {
     }
 
     public List<Nodify> findByUserId(Integer id) {
-        String sql = "select * from t_nodify where user_id=?";
+        String sql = "select * from t_nodify where user_id=? order by readtime";
         return DbHelp.query(sql,new BeanListHandler<>(Nodify.class),id);
     }
 

@@ -68,13 +68,14 @@
 <script src="/static/js/jquery-1.11.1.js"></script>
 <script>
     $(function () {
-        $("#ckfather").click(function () {
-            var sons = $(".ckSon");
-            for(var i = 0;i < sons.length;i++) {
-                sons[i].checked = $(this)[0].checked;
-            }
 
-            if ($(this)[0].checked == true) {
+        $("#ckFather").click(function () {
+                var sons = $(".ckSon");
+                for(var i = 0;i < sons.length;i++) {
+                    sons[i].checked = $(this)[0].checked;
+                }
+
+            if ($(this)[0].checked) {
                 $("#markBtn").removeAttr("disabled");
             } else {
                 $("#markBtn").attr("disabled","disabled");
@@ -82,14 +83,15 @@
         });
 
         $(".ckSon").click(function () {
+            var sons = $(".ckSon");
             var num = 0;
-            for(var i =0;i<$(this).length;i++) {
-                if($(this)[i].checked) {
+            for(var i =0;i<sons.length;i++) {
+                if(sons[i].checked) {
                     num++;
                 }
             }
 
-            if (num == $(this).length) {
+            if (num == sons.length) {
                 $("#ckFather")[0].checked = true;
             } else {
                 $("#ckFather")[0].checked = false;
